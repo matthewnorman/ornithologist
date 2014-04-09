@@ -23,6 +23,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/data', express.static(path.join(__dirname, 'public/data')));
 
 app.engine('html', require('ejs').renderFile)
 
@@ -34,6 +35,9 @@ if ('development' == app.get('env')) {
 //app.get('/', routes.index);
 app.get('/test', function(req, res) {
     res.render('test.html');
+});
+app.get('/map', function(req, res) {
+    res.render('map.html')
 });
 app.get('/users', user.list);
 
