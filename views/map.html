@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 
+<style>
+.subunit.JPS { fill: #ddc; }
+.subunit.JPH { fill: #cdd; }
+.subunit.JPK { fill: #cdc; }
+.subunit.JPY { fill: #dcd; }
+
+</style>
+
 <html>
 <head>
   <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -23,9 +31,12 @@
     .attr("height", height);
 
     d3.json("data/japan.json", function(error, jp) {
-    svg.append("path")
-    .datum(topojson.feature(jp, jp.objects.subunits))
+    svg.selectAll(".subunit")
+    .data(topojson.feature(jp, jp.objects.subunits).features)
+    .enter().append("path")
+    .attr("class", function(d) { return "subunit " + d.id; })
     .attr("d", path);
+    
     });
   </script>
 </body>
