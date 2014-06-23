@@ -29,6 +29,7 @@ text {
  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
  font-size: 10px;
  pointer-events: none;
+ fill: white;
 }
 </style>
 
@@ -82,17 +83,21 @@ text {
     .style("text-anchor", function(d) { return d.geometry.coordinates[0] > -1 ? "start" : "end"; })
     .text(function(d) {return d.properties.name; });
 
+    svg.transition()
+      .style("background-color", "gray");
+
     var chart_data = [10, 22, 31, 5, 16];
 
     var x_scale = d3.scale.linear()
      .domain([0, d3.max(chart_data)])
      .range([0, 420]);
 
-    d3.select(".chart")
+    var bar = d3.select(".chart")
     .selectAll("div")
       .data(chart_data)
     .enter().append("div")
       .style("width", function(d) { return x_scale(d) + "px"; });
+
     
     });
   </script>
